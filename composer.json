@@ -30,9 +30,9 @@
         "friendsofphp/php-cs-fixer": "^3.5"
     },
     "autoload": {
-        "psr-4": { "PofP\\SmartzoneClient\\" : "lib/" }
+        "psr-4": { "PofP\\SmartzoneClient\\" : "src/lib/" }
     },
     "autoload-dev": {
-        "psr-4": { "PofP\\SmartzoneClient\\Test\\" : "test/" }
+        "psr-4": { "PofP\\SmartzoneClient\\Test\\" : "src/test/" }
     }
 }
