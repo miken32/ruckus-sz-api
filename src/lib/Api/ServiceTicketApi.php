@@ -130,16 +130,17 @@ class ServiceTicketApi
      *
      * Use this API command to log on to the controller and acquire a valid service ticket.
      *
-     * @param   $UNKNOWN_PARAM_NAME UNKNOWN_PARAM_NAME (required)
+     * @param  string $username (required)
+     * @param  string $password (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addServiceTicket'] to see the possible values for this operation
      *
      * @throws \PofP\SmartzoneClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return |\PofP\SmartzoneClient\Model\ServiceTicketLoginResponse
      */
-    public function addServiceTicket($UNKNOWN_PARAM_NAME, string $contentType = self::contentTypes['addServiceTicket'][0])
+    public function addServiceTicket(string $username, string $password, string $contentType = self::contentTypes['addServiceTicket'][0])
     {
-        list($response) = $this->addServiceTicketWithHttpInfo($UNKNOWN_PARAM_NAME, $contentType);
+        list($response) = $this->addServiceTicketWithHttpInfo($username, $password, $contentType);
         return $response;
     }
 
@@ -148,16 +149,17 @@ class ServiceTicketApi
      *
      * Use this API command to log on to the controller and acquire a valid service ticket.
      *
-     * @param   $UNKNOWN_PARAM_NAME (required)
+     * @param  string $username (required)
+     * @param  string $password (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addServiceTicket'] to see the possible values for this operation
      *
      * @throws \PofP\SmartzoneClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of |\PofP\SmartzoneClient\Model\ServiceTicketLoginResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function addServiceTicketWithHttpInfo($UNKNOWN_PARAM_NAME, string $contentType = self::contentTypes['addServiceTicket'][0])
+    public function addServiceTicketWithHttpInfo(string $username, string $password, string $contentType = self::contentTypes['addServiceTicket'][0])
     {
-        $request = $this->addServiceTicketRequest($UNKNOWN_PARAM_NAME, $contentType);
+        $request = $this->addServiceTicketRequest($username, $password, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -272,15 +274,16 @@ class ServiceTicketApi
      *
      * Use this API command to log on to the controller and acquire a valid service ticket.
      *
-     * @param   $UNKNOWN_PARAM_NAME (required)
+     * @param  string $username (required)
+     * @param  string $password (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addServiceTicket'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addServiceTicketAsync($UNKNOWN_PARAM_NAME, string $contentType = self::contentTypes['addServiceTicket'][0])
+    public function addServiceTicketAsync(string $username, string $password, string $contentType = self::contentTypes['addServiceTicket'][0])
     {
-        return $this->addServiceTicketAsyncWithHttpInfo($UNKNOWN_PARAM_NAME, $contentType)
+        return $this->addServiceTicketAsyncWithHttpInfo($username, $password, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -293,16 +296,17 @@ class ServiceTicketApi
      *
      * Use this API command to log on to the controller and acquire a valid service ticket.
      *
-     * @param   $UNKNOWN_PARAM_NAME (required)
+     * @param  string $username (required)
+     * @param  string $password (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addServiceTicket'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function addServiceTicketAsyncWithHttpInfo($UNKNOWN_PARAM_NAME, string $contentType = self::contentTypes['addServiceTicket'][0])
+    public function addServiceTicketAsyncWithHttpInfo(string $username, string $password, string $contentType = self::contentTypes['addServiceTicket'][0])
     {
         $returnType = '\PofP\SmartzoneClient\Model\ServiceTicketLoginResponse';
-        $request = $this->addServiceTicketRequest($UNKNOWN_PARAM_NAME, $contentType);
+        $request = $this->addServiceTicketRequest($username, $password, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -343,19 +347,27 @@ class ServiceTicketApi
     /**
      * Create request for operation 'addServiceTicket'
      *
-     * @param   $UNKNOWN_PARAM_NAME (required)
+     * @param  string $username (required)
+     * @param  string $password (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['addServiceTicket'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function addServiceTicketRequest($UNKNOWN_PARAM_NAME, string $contentType = self::contentTypes['addServiceTicket'][0])
+    public function addServiceTicketRequest(string $username, string $password, string $contentType = self::contentTypes['addServiceTicket'][0])
     {
 
-        // verify the required parameter 'UNKNOWN_PARAM_NAME' is set
-        if ($UNKNOWN_PARAM_NAME === null || (is_array($UNKNOWN_PARAM_NAME) && count($UNKNOWN_PARAM_NAME) === 0)) {
+        // verify the required parameter 'username' is set
+        if ($username === null || (is_array($username) && count($username) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $UNKNOWN_PARAM_NAME when calling addServiceTicket'
+                'Missing the required parameter $username when calling addServiceTicket'
+            );
+        }
+
+        // verify the required parameter 'password' is set
+        if ($password === null || (is_array($password) && count($password) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $password when calling addServiceTicket'
             );
         }
 
@@ -368,6 +380,25 @@ class ServiceTicketApi
         $multipart = false;
 
 
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $username,
+            'username', // param base name
+            'string', // openApiType
+            '', // style
+            false, // explode
+            true // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $password,
+            'password', // param base name
+            'string', // openApiType
+            '', // style
+            false, // explode
+            false // required
+        ) ?? []);
+
 
 
 
@@ -377,15 +408,7 @@ class ServiceTicketApi
             $multipart
         );
 
-        // for model (json/xml)
-        if (isset($UNKNOWN_PARAM_NAME)) {
-            if (stripos($headers['Content-Type'], 'application/json') !== false) {
-                # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($UNKNOWN_PARAM_NAME));
-            } else {
-                $httpBody = $UNKNOWN_PARAM_NAME;
-            }
-        } elseif (count($formParams) > 0) {
+        if (count($formParams) > 0) {
             if ($multipart) {
                 $multipartContents = [];
                 foreach ($formParams as $formParamName => $formParamValue) {
