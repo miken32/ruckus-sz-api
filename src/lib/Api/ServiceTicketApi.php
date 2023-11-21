@@ -380,8 +380,8 @@ class ServiceTicketApi
         $multipart = false;
 
 
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+        // form params
+        $formParams = array_merge($formParams, ObjectSerializer::toQueryValue(
             $username,
             'username', // param base name
             'string', // openApiType
@@ -389,8 +389,8 @@ class ServiceTicketApi
             false, // explode
             true // required
         ) ?? []);
-        // query params
-        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+        // form params
+        $formParams = array_merge($formParams, ObjectSerializer::toQueryValue(
             $password,
             'password', // param base name
             'string', // openApiType
